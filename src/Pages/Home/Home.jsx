@@ -18,13 +18,13 @@ const Home = () => {
                 to="/register"
                 className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
               >
-                Sign In
+                Signup
               </Link>
               <Link
                 to="/login"
                 className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
               >
-                Sign Up
+                Signin
               </Link>
             </div>
           </div>
