@@ -18,7 +18,7 @@ const Dashboard = () => {
             {/* users route */}
             <li className="text-lg rounded-xl py-1 border-y font-semibold">
               <NavLink
-                to="/dashboard/profile"
+                to="/dashboard/alluser"
                 className={({ isActive, isPending }) =>
                   isPending
                     ? "pending"
@@ -78,7 +78,7 @@ const Dashboard = () => {
                 {/* users routes */}
                 <li className="btn w-full text-lg btn-sm rounded-xl">
                   <NavLink
-                    to="/dashboard/profile"
+                    to="/dashboard/alluser"
                     className={({ isActive, isPending }) =>
                       isPending
                         ? "pending"
