@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoPersonAddSharp } from "react-icons/io5";
+import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const Alluser = () => {
   const [userList, setUserList] = useState([]);
   const { register, handleSubmit } = useForm();
@@ -17,6 +19,14 @@ const Alluser = () => {
         });
     },
   });
+
+  const deleteHandler = (id) => {
+    console.log(id);
+    axios.delete(`http://localhost:5000/user/${id}`).then((res) => {
+      console.log(res.data);
+      refetch();
+    });
+  };
 
   const userAddHandler = () => {
     // axios.post("http://localhost:5000/user")
@@ -53,12 +63,27 @@ const Alluser = () => {
       <div>
         {userList.map((item) => (
           <div key={item._id}>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card container mx-auto my-3 px-2 bg-base-100 shadow-xl">
               <div className="card-body">
-                <h2 className="card-title">{item.name}</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
+                <h2 className="card-title">Name: {item?.name}</h2>
+                <p className="text-lg font-semibold">Phone: {item?.mobile}</p>
+                <p className="text-lg font-semibold">Email: {item?.email}</p>
+                <div className="card-actions">
+                  <Link
+                    to={`/dashboard/details/${item._id}`}
+                    className="btn bg-blue-600 text-white"
+                  >
+                    <FaEye className="text-lg" />
+                  </Link>
+                  <button className="btn bg-yellow-500 text-white">
+                    <FaPen className="text-lg" />
+                  </button>
+                  <button
+                    onClick={() => deleteHandler(item?._id)}
+                    className="btn bg-red-600 text-white"
+                  >
+                    <FaTrashAlt className="text-lg" />
+                  </button>
                 </div>
               </div>
             </div>

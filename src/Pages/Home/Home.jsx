@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/MainImage.png";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/Authprovider";
 const Home = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+
+  const logOutHandler = () => {
+    logoutUser()
+      .then(() => {
+        console.log("logged Out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div className="hero min-h-screen bg-[#F2D335]">
@@ -14,18 +27,37 @@ const Home = () => {
               et a id nisi.
             </p>
             <div className="flex flex-row gap-4">
-              <Link
-                to="/register"
-                className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
-              >
-                Signup
-              </Link>
-              <Link
-                to="/login"
-                className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
-              >
-                Signin
-              </Link>
+              {user ? (
+                <>
+                  <Link
+                    to="/dashboard/alluser"
+                    className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={logOutHandler}
+                    className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/register"
+                    className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
+                  >
+                    Signup
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="btn bg-[#F2D335] text-black md:text-xl btn-outline"
+                  >
+                    Signin
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
