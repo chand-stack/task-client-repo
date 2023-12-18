@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import img from "../../assets/MainImage.png";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../AuthProvider/Authprovider";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [selecteGender, setSelectedGender] = useState(null);
   const [selectedHear, setSelectedHear] = useState(null);
   const [state, setState] = useState("");
+  const { createUser } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
   const handleGenderClick = (gender) => {
@@ -28,6 +32,8 @@ const Register = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     // console.log(data);
     const name = data.name;
@@ -38,7 +44,29 @@ const Register = () => {
     const hear = selectedHear;
     const city = data.city;
     const citystate = state;
-    console.log(name, email, password, phone, gender, hear, city, citystate);
+    // console.log(name, email, password, phone, gender, hear, city, citystate);
+    const adminInfo = {
+      name,
+      email,
+      phone,
+      gender,
+      hear,
+      city,
+      citystate,
+    };
+    createUser(email, password)
+      .then((res) => {
+        // console.log(res.user);
+        axios
+          .post("http://localhost:5000/admin", adminInfo)
+          .then((response) => {
+            // console.log(response.data);
+            navigate("/dashboard/alluser");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
