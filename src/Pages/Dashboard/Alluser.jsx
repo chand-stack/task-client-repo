@@ -13,7 +13,7 @@ const Alluser = () => {
     queryKey: ["user"],
     queryFn: async () => {
       const res = await axios
-        .get("http://localhost:5000/user")
+        .get("task-server-sage.vercel.app/user")
         .then((response) => {
           setUserList(response.data.data);
         });
@@ -22,7 +22,7 @@ const Alluser = () => {
 
   const deleteHandler = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:5000/user/${id}`).then((res) => {
+    axios.delete(`task-server-sage.vercel.app/user/${id}`).then((res) => {
       console.log(res.data);
       refetch();
     });
@@ -43,7 +43,7 @@ const Alluser = () => {
     const inserted = userList.length;
 
     const user = { name, phone, email, inserted };
-    axios.post("http://localhost:5000/user", user).then((res) => {
+    axios.post("task-server-sage.vercel.app/user", user).then((res) => {
       console.log(res.data);
       refetch();
     });

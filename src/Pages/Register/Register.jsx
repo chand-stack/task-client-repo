@@ -58,7 +58,7 @@ const Register = () => {
       .then((res) => {
         // console.log(res.user);
         axios
-          .post("http://localhost:5000/admin", adminInfo)
+          .post("task-server-sage.vercel.app/admin", adminInfo)
           .then((response) => {
             // console.log(response.data);
             navigate("/dashboard/alluser");

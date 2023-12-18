@@ -37,7 +37,7 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard/details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/user/${params.id}`),
+          fetch(`task-server-sage.vercel.app/user/${params.id}`),
         element: <Deatil></Deatil>,
       },
     ],
